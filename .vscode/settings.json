@@ -1,0 +1,12 @@
+{
+    "git.fetchOnPull": true,
+    "git.autorefresh": false,
+    "git.allowForcePush": true,
+    "githubIssues.ignoreUserCompletionTrigger": [
+        "python",
+        "javascript"
+    ],
+    "git.scanRepositories": [
+        "C:\\Users\\Manit\\app"
+    ]
+}
