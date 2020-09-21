@@ -13,7 +13,7 @@ var userSchema = new mongoose.Schema({
         type: String,
         required: false
     },
-    dateJoinedID: {
+    id: {
         type: Date,
         required: true,
         default: Date.now().toString()
@@ -22,10 +22,6 @@ var userSchema = new mongoose.Schema({
         type: Date,
         required: true,
         default: Date.now()
-    },   
-    Userid: {
-        type: String,
-        required: true
     }
 })
 

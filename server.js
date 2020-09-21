@@ -12,11 +12,17 @@ const passport = require('passport')
 const flash = require('express-flash')
 const session = require('express-session')
 
+const find_user_by_username = (username2) => {
+    const user = Bu.find( { username: username2 } )
+}
+const find_user_by_id = (id2) => {
+    const user =  Bu.find( { id: id2 } )
+}
+
 initPassport(
     passport,
-    username => Bu.find(user => { username: username }),
-    id => Bu.find(user => { id: id })
-
+    username => { return find_user_by_username(username) },
+    id => { return find_user_by_id(id) }
 )
 
 app.listen(PORT, () => {
@@ -38,11 +44,11 @@ mongoose.connect(process.env.DATABASE_URL, { useUnifiedTopology: true, useNewUrl
 
 app.set('view-engine', 'ejs')
 
-app.get('/', (req, res) => {
+app.get('/', (_req, res) => {
     res.render('register.ejs')
 })
 
-app.get('/login', (req, res) => {
+app.get('/login', (_req, res) => {
     res.render('login.ejs')
 })
 
@@ -72,6 +78,6 @@ app.post('/', async (req, res) => {
     }
 })
 
-app.get('/home', (req, res) => {
+app.get('/home', (_req, res) => {
     res.render('index.ejs')
 })
