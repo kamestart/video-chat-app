@@ -6,6 +6,8 @@
     <title>Document</title>
 </head>
 <body>
+    <script src="https://www.google.com/recaptcha/api.js"></script>
+    <script src="https://www.google.com/recaptcha/api.js?render=reCAPTCHA_site_key"></script>
     <div class="content">   
         <h1>Login</h1>
         <form action="/login" method="POST">
@@ -18,9 +20,24 @@
                 <input type="password" name="password" id="pwd" class="form_field" placeholder="Password" required>
             </div>
             <script src="php/recaptcha.php"></script>
-            <button type="submit" value="Login">Login</button>
+            <button type="submit" value="Login" class="g-recaptcha" 
+            onclick="onClick()"
+            data-sitekey="6LeUsc4ZAAAAAIvj3hywskwGkiwEncZvhVmasFx4" 
+            data-callback='onSubmit' 
+            data-action='submit'>Login</button>
         </form>
-        <a href="/register">register</a>
+        <a href="/register">register</a>   
+        <script>
+            function onClick(e) {
+              e.preventDefault();
+              grecaptcha.ready(function() {
+                grecaptcha.execute('reCAPTCHA_site_key', {action: 'submit'}).then(function(token) {
+                    // Add your logic to submit to your backend server here.
+                });
+              });
+            }
+        </script>
+
         
     </div>
 </body>

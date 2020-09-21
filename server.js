@@ -9,7 +9,7 @@ const Bu = require('./models/users')
 const bcrypt = require('bcrypt')
 const initPassport = require('./passport-config')
 const passport = require('passport')
-initPassport(passport)
+//initPassport(passport)
 
 app.listen(PORT, () => {
     console.log(`Server Started on port ${PORT} `)
