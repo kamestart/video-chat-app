@@ -17,28 +17,45 @@
 
 </head>
 <body>
-    <div class="content">   
-        <h1>Login</h1>
-        <form action="/login" method="POST">
-                
-            <div>
-                <input type="text" name="username" id="username" class="form_field" placeholder="Github Username">
+    <div class="content">
+        <div class="main">
+            <div class="form">
+                <div class="header">
+                    <h1>Login</h1>
+                </div>
+                <small>
+                <% if (messages.error) { %>
+                    <%= messages.error %>
+                <% } %>
+                </small>      
+                <div class="form">
+                    <form action="/login" method="POST">
+                            
+                        <div>
+                            <input type="text" name="username" id="username" class="form_field" placeholder="Github Username">
+                        </div>
+                        <br>
+                        <br>
+                        <div>
+                            <input type="password" name="password" id="pwd" class="form_field" placeholder="Password" required>
+                        </div>
+                        <br>
+
+                        <script src="php/recaptcha.php"></script>
+                        <div class="g-recaptcha" data-sitekey="6Lfgtc4ZAAAAAEEqtkAMRnDrdYWRBxI-sPGxrVB0"></div>
+                        <br />
+                        <br>
+                        <button type="submit" value="Login" >Login</button>
+
+                    </form>
+                </div>
+                <div class="link_to_register">
+                    <a href="/register">register</a>   
+                </div>
+                <script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit"
+                async defer></script>
             </div>
-
-            <div>
-                <input type="password" name="password" id="pwd" class="form_field" placeholder="Password" required>
-            </div>
-            <script src="php/recaptcha.php"></script>
-            <div class="g-recaptcha" data-sitekey="6Lfgtc4ZAAAAAEEqtkAMRnDrdYWRBxI-sPGxrVB0"></div>
-            <br />
-
-            <button type="submit" value="Login" >Login</button>
-
-        </form>
-        <a href="/register">register</a>   
-
-        <script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit"
-        async defer></script>        
+        </div>        
     </div>
 </body>
 </html>
