@@ -11,6 +11,7 @@ const initPassport = require('./passport-config')
 const passport = require('passport')
 const flash = require('express-flash')
 const session = require('express-session')
+var MemoryStore = require('memorystore')(session)
 
 const find_user_by_username = (username2) => {
     const user = Bu.find( { username: username2 } )
@@ -20,6 +21,7 @@ const find_user_by_id = (id2) => {
 }
 
 initPassport(
+    
     passport,
     username => { return find_user_by_username(username) },
     id => { return find_user_by_id(id) }
@@ -33,6 +35,10 @@ app.use(express.static(__dirname + '/public'))
 app.use(express.urlencoded({ extended: false }))
 app.use(flash())
 app.use(session({
+    cookie: { maxAge: 86400000 },
+    store: new MemoryStore({
+      checkPeriod: 86400000 // prune expired entries every 24h
+    }),
     secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false
