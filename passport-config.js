@@ -3,7 +3,7 @@ const bcrypt = require('bcrypt')
 const passport = require('passport')
 
 
-function initializePassportLocal(passport, getUserByUsername) {
+function initializePassportLocal(passport, getUserByUsername, getUserById) {
     const authenticateUser = async (username, password, done) => {
         const user = getUserByUsername(username)
         if (user == null) {
@@ -25,8 +25,10 @@ function initializePassportLocal(passport, getUserByUsername) {
 
   passport.use(new localStrat({ usernameField: 'username' },
   authenticateUser))
-  passport.serializeUser((user, done) => {  })
-  passport.deserializeUser((id, done) => {  })
+  passport.serializeUser((user, done) =>  done(null, user.id))
+  passport.deserializeUser((id, done) => {
+      done(null, getUserById(id))
+  })
 }
 
 module.exports = initializePassportLocal

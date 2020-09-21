@@ -12,11 +12,12 @@ const passport = require('passport')
 const flash = require('express-flash')
 const session = require('express-session')
 
-initPassport(passport, username => {
-    Bu.find(user => {user.username === username})
-    Bu.find(user => {user.id === id})
+initPassport(
+    passport,
+    username => Bu.find(user => {Bu.username === username}),
+    id => Bu.find(user => {Bu.id === id})
 
-})
+)
 
 app.listen(PORT, () => {
     console.log(`Server Started on port ${PORT} `)
