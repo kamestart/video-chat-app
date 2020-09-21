@@ -15,29 +15,44 @@
 </head>
 <body>
     <div class="content">
-        <h1>Register</h1>
-        <form action="/register" method="POST">
-            <div>
-                <input type="email" name="Email" id="mail" class="form_field" placeholder="Email">
+        <div class="main">
+            <div class="http53">
+                <div class="form">
+                    <div class="header">
+                        <h1>Register</h1>
+                    </div>
+                    <div class="form">
+                        <form action="/register" method="POST">
+                            <br>
+                            <br>
+                            <div>
+                                <input type="email" name="Email" id="mail" class="form_field" placeholder="Email">
+                            </div>
+
+                            <br>
+                            <div>
+                                <input type="text" name="username" id="username" class="form_field" placeholder="Github Username">
+                            </div>
+
+                            <br>
+                            <div>
+                                <input type="password" name="password" id="password" class="form_field" placeholder="Password" required>
+                            </div>
+                            <br>
+                            <br>
+                            <div class="g-recaptcha" data-sitekey="6Lfgtc4ZAAAAAEEqtkAMRnDrdYWRBxI-sPGxrVB0"></div>
+                            <br>
+                            <button type="submit" value="Register">Register</button>
+                        </form>
+                    </div>
+                    <div class="login_link">
+                        <a href="/login">Login</a>
+               `    </div>
+                    <script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit"
+                async defer></script>
+                </div>
             </div>
-
-            <div>
-                <input type="text" name="username" id="username" class="form_field" placeholder="Github Username">
-            </div>
-
-            <div>
-                <input type="password" name="password" id="password" class="form_field" placeholder="Password" required>
-            </div>
-
-            <br>
-            <div class="g-recaptcha" data-sitekey="6Lfgtc4ZAAAAAEEqtkAMRnDrdYWRBxI-sPGxrVB0"></div>
-
-            <button type="submit" value="Register">Register</button>
-        </form>
-        <a href="/login">Login</a>
-
-        <script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit"
-        async defer></script>    
+        </div>    
     </div>
 </body>
 </html>
