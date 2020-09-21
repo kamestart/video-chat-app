@@ -13,7 +13,9 @@ const flash = require('express-flash')
 const session = require('express-session')
 
 initPassport(passport, username => {
-    Bu.find(user => {username: username})
+    Bu.find(user => {user.username === username})
+    Bu.find(user => {user.id === id})
+
 })
 
 app.listen(PORT, () => {
