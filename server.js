@@ -36,14 +36,12 @@ app.post('/login', (req, res) => {
 app.post('/register', async (req, res) => {
     let i = 1
     try {
-        const hashedPwd = await bcrypt.hash(req.body.password, 10)
+        const hashedPwd = await bcrypt.hash(req.body.password, 15)
         const newUserToDB = new Bu ({
             username: req.body.username,
             password: hashedPwd,
-            email: req.body.email,
-            _id: i
+            email: req.body.email
         })
-        i++
         newUserToDB.save()
         res.redirect('/login')
     } catch (e) {
