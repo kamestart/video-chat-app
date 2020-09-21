@@ -12,7 +12,7 @@ function initializePassportLocal(passport, getUserByUsername, getUserById) {
     
 
     try {
-        if (await bcrypt.compare(password, user.password)) {
+        if (await bcrypt.compare(user.password, password)) {
             return done(null, user)
         } else {
             return done(null, false, {message: 'Incorrect Username Or Password '})
