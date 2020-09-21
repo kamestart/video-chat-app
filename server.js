@@ -34,15 +34,6 @@ app.listen(PORT, () => {
 app.use(express.static(__dirname + '/public'))
 app.use(express.urlencoded({ extended: false }))
 app.use(flash())
-app.use(session({
-    cookie: { maxAge: 86400000 },
-    store: new MemoryStore({
-      checkPeriod: 86400000 // prune expired entries every 24h
-    }),
-    secret: process.env.SESSION_SECRET,
-    resave: false,
-    saveUninitialized: false
-}))
 app.use(passport.initialize())
 app.use(passport.session())
 
