@@ -14,8 +14,8 @@ const session = require('express-session')
 
 initPassport(
     passport,
-    username => Bu.find(user => {Bu.username === username}),
-    id => Bu.find(user => {Bu.id === id})
+    username => Bu.find(user => { username: username }),
+    id => Bu.find(user => { id: id })
 
 )
 
