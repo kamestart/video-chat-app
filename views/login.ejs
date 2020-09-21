@@ -4,8 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <script src="https://www.google.com/recaptcha/api.js"></script>
-    <script src="https://www.google.com/recaptcha/api.js?render=6LeUsc4ZAAAAAIvj3hywskwGkiwEncZvhVmasFx4"></script>
+    <script type="text/javascript">
+        var onloadCallback = function() {
+          grecaptcha.render('html_element', {
+            'sitekey' : '6Lfgtc4ZAAAAAEEqtkAMRnDrdYWRBxI-sPGxrVB0'
+          });
+        };
+    </script>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+</script>
+
+
 </head>
 <body>
     <div class="content">   
@@ -20,26 +29,17 @@
                 <input type="password" name="password" id="pwd" class="form_field" placeholder="Password" required>
             </div>
             <script src="php/recaptcha.php"></script>
+            <div class="g-recaptcha" data-sitekey="6Lfgtc4ZAAAAAEEqtkAMRnDrdYWRBxI-sPGxrVB0"></div>
+            <br />
+
             <button type="submit" value="Login" >Login</button>
 
-            <div class="g-recaptcha" 
-            data-sitekey="6LeUsc4ZAAAAAIvj3hywskwGkiwEncZvhVmasFx4" 
-            data-callback='onSubmit' 
-            data-action='submit'>Submit</div>
+            <div>Submit</div>
         </form>
         <a href="/register">register</a>   
-        <script>
-            function onClick(e) {
-              e.preventDefault();
-              grecaptcha.ready(function() {
-                grecaptcha.execute('reCAPTCHA_site_key', {action: 'submit'}).then(function(token) {
-                    // Add your logic to submit to your backend server here.
-                });
-              });
-            }
-        </script>
 
-        
+        <script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit"
+        async defer></script>        
     </div>
 </body>
 </html>
