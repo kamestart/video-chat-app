@@ -41,7 +41,7 @@ app.post('/register', async (req, res) => {
             username: req.body.username,
             password: hashedPwd,
             email: req.body.email,
-            _id: ObjectId(i)
+            _id: i
         })
         i++
         newUserToDB.save()
