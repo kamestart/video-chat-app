@@ -43,8 +43,10 @@ app.post('/register', async (req, res) => {
         const newUserToDB = new Bu ({
             username: req.body.username,
             password: hashedPwd,
-            email: req.body.email
+            email: req.body.email,
+            Userid: i
         })
+        i++
         newUserToDB.save()
         res.redirect('/login')
     } catch (e) {

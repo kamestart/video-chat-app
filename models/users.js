@@ -22,8 +22,11 @@ var userSchema = new mongoose.Schema({
         type: Date,
         required: true,
         default: Date.now()
-    }   
-    
+    },   
+    Userid: {
+        type: String,
+        required: true
+    }
 })
 
 
