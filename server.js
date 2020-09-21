@@ -26,6 +26,7 @@ initPassport(
     username => { return find_user_by_username(username) },
     id => { return find_user_by_id(id) }
 )
+app.set('trust proxy', 1);
 
 app.listen(PORT, () => {
     console.log(`Server Started on port ${PORT} `)
@@ -34,6 +35,16 @@ app.listen(PORT, () => {
 app.use(express.static(__dirname + '/public'))
 app.use(express.urlencoded({ extended: false }))
 app.use(flash())
+app.use(session({
+    cookie:{
+        secure: true,
+        maxAge: 86400000
+           },
+    store: new MemoryStore(),
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: false
+}))
 app.use(passport.initialize())
 app.use(passport.session())
 
@@ -41,11 +52,11 @@ mongoose.connect(process.env.DATABASE_URL, { useUnifiedTopology: true, useNewUrl
 
 app.set('view-engine', 'ejs')
 
-app.get('/', (_req, res) => {
+app.get('/', (req, res) => {
     res.render('register.ejs')
 })
 
-app.get('/login', (_req, res) => {
+app.get('/login', (req, res) => {
     res.render('login.ejs')
 })
 
