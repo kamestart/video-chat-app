@@ -4,6 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <script type="text/javascript">
+        var onloadCallback = function() {
+          grecaptcha.render('html_element', {
+            'sitekey' : '6Lfgtc4ZAAAAAEEqtkAMRnDrdYWRBxI-sPGxrVB0'
+          });
+        };
+    </script>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </head>
 <body>
     <div class="content">
@@ -20,9 +28,16 @@
             <div>
                 <input type="password" name="password" id="password" class="form_field" placeholder="Password" required>
             </div>
+
+            <br>
+            <div class="g-recaptcha" data-sitekey="6Lfgtc4ZAAAAAEEqtkAMRnDrdYWRBxI-sPGxrVB0"></div>
+
             <button type="submit" value="Register">Register</button>
         </form>
         <a href="/login">Login</a>
+
+        <script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit"
+        async defer></script>    
     </div>
 </body>
 </html>
