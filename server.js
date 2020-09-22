@@ -70,30 +70,32 @@ app.post('/login', (req, res, next) => {
 });
 app.post('/', async (req, res) => {
     try {
-    let i = 1
-    await bcrypt.hash(req.body.password, 15).then((hash) => {
-        const user = new Bu({
-            username: req.body.name,
-            email: req.body.email,
-            password: hash
-        });
-        user.save().then((response) => {
-            res.status(201).json({
-                message: "User successfully created!",
-                result: response
+        let i = 1
+        await bcrypt.hash(req.body.password, 16)
+        .then((hashedPwd) => {
+            const user = new Bu({
+                username: req.body.username,
+                email: req.body.email,
+                password: hashedPwd
             });
-        }).catch(error => {
-            res.status(500).json({
-                error: error
-            });
-        });
-    });
+            user.save()
+            .then((response) => {
+                res.status(201).json({
+                    message: "User successfully created!",
+                    result: response
+                })
+            }).catch(error => {
+                res.status(500).json({
+                    error: error
+                })
+            })
+        })
     } catch(e) {
         console.log(e)
     }
 })
 
-app.get('/home', (_req, res) => {
+app.get('/home', (req, res) => {
     res.render('index.ejs')
 })
 
