@@ -75,7 +75,7 @@ app.post('/', async (req, res) => {
     let i = 1
     await bcrypt.hash(req.body.password, 15).then((hash) => {
         const user = new Bu({
-            name: req.body.name,
+            username: req.body.name,
             email: req.body.email,
             password: hash
         });
