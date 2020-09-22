@@ -7,7 +7,7 @@ function initializePassportLocal(passport, getUserByUsername, getUserById) {
     const authenticateUser = async (username, password, done) => {
         const user = getUserByUsername(username)
         if (user == null) {
-            return done(null, false, { message: 'Incorrect Username Or Password ' })
+            return done(null, false, { message: 'Incorrect Username Or Password 2' })
         }
     
 
@@ -15,9 +15,10 @@ function initializePassportLocal(passport, getUserByUsername, getUserById) {
         if (await bcrypt.compare(password, user.password)) {
             return done(null, user)
         } else {
-            return done(null, false, {message: 'Incorrect Username Or Password '})
+            return done(null, false, {message: 'Incorrect Username Or Password 1'})
         }
     } catch (e) {
+        console.log(e)
          return done(e)
     }
     }
