@@ -71,8 +71,9 @@ app.post('/login', (req, res, next) => {
     })(req, res, next);
 });
 app.post('/', async (req, res) => {
+    try {
     let i = 1
-    bcrypt.hash(req.body.password, 1).then((hash) => {
+    await bcrypt.hash(req.body.password, 15).then((hash) => {
         const user = new userSchema({
             name: req.body.name,
             email: req.body.email,
@@ -89,6 +90,9 @@ app.post('/', async (req, res) => {
             });
         });
     });
+    } catch(e) {
+        console.log(e)
+    }
 })
 
 app.get('/home', (_req, res) => {
