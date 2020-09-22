@@ -33,7 +33,7 @@ app.listen(PORT, () => {
 })
 
 app.use(express.static(__dirname + '/public'))
-app.use(express.urlencoded({ extended: false }))
+app.use(express.json())
 app.use(flash())
 app.use(session({
     cookie: {
@@ -72,20 +72,23 @@ app.post('/login', (req, res, next) => {
 });
 app.post('/', async (req, res) => {
     let i = 1
-    try {
-        const hashedPwd = await bcrypt.hash(req.body.password, 15)
-        const newUserToDB = new Bu ({
-            username: req.body.username,
-            password: hashedPwd,
+    bcrypt.hash(req.body.password, 1).then((hash) => {
+        const user = new userSchema({
+            name: req.body.name,
             email: req.body.email,
-            Userid: i
-        })
-        i++
-        newUserToDB.save()
-        res.redirect('/login')
-    } catch (e) {
-        console.log(e)
-    }
+            password: hash
+        });
+        user.save().then((response) => {
+            res.status(201).json({
+                message: "User successfully created!",
+                result: response
+            });
+        }).catch(error => {
+            res.status(500).json({
+                error: error
+            });
+        });
+    });
 })
 
 app.get('/home', (_req, res) => {

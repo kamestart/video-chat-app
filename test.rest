@@ -1,0 +1,8 @@
+POST https://test-a-app1.herokuapp.com
+Content-Type: application/json
+
+{
+    "name": "Manit",
+    "password": "Test",
+    "email": "e@e.com"
+}
