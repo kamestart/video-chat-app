@@ -21,7 +21,7 @@ function initialize(passport, getUserByEmail, getUserById) {
   }
 
   passport.use(new LocalStrategy({
-    usernameField: 'username',
+    usernameField: 'username' ,//username . 
     passwordField: 'password' 
   }, authenticateUser))
 

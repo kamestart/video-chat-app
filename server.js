@@ -12,6 +12,7 @@ const passport = require('passport')
 const flash = require('express-flash')
 const session = require('express-session')
 var MemoryStore = require('memorystore')(session)
+const bodyParser = require('body-parser')
 
 const find_user_by_username = (username2) => {
     const user = Bu.find( { username: username2 } )
@@ -33,7 +34,7 @@ app.listen(PORT, () => {
 })
 
 app.use(express.static(__dirname + '/public'))
-app.use(express.json())
+app.use(bodyParser.json())
 app.use(flash())
 app.use(session({
     cookie: {
