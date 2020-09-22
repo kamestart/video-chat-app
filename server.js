@@ -66,7 +66,7 @@ app.post('/login', passport.authenticate('local', {
     successRedirect: '/home',
     failureRedirect: '/login',
     failureFlash: true
-}))
+}))(req, res, next)
 
 app.post('/', async (req, res) => {
     let i = 1
