@@ -31,4 +31,4 @@ function initialize(passport, getUserByEmail, getUserById) {
   })
 }
 
-module.exports = initialize()
+module.exports = initialize
