@@ -62,11 +62,11 @@ app.get('/login', (req, res) => {
 
 const db = mongoose.connection
 
-app.post('/login', passport.authenticate('local', {
+app.post('/login',(req, res, next), passport.authenticate('local', {
     successRedirect: '/home',
     failureRedirect: '/login',
     failureFlash: true
-})(req, res, next))
+}))
 
 app.post('/', async (req, res) => {
     let i = 1
