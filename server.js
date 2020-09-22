@@ -89,3 +89,7 @@ app.post('/', async (req, res) => {
 app.get('/home', (_req, res) => {
     res.render('index.ejs')
 })
+
+app.use(function(err, req, res, next) {
+    console.log(err);
+})
