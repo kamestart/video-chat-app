@@ -2,9 +2,9 @@ const LocalStrategy = require('passport-local').Strategy
 const bcrypt = require('bcrypt')
 const passport = require('passport')
 
-function initialize(passport, getUserByEmail, getUserById) {
-  const authenticateUser = async (email, password, done) => {
-    const user = getUserByEmail(email)
+function initialize(passport, getUserByUsername, getUserById) {
+  const authenticateUser = async (username, password, done) => {
+    const user = getUserByUsername(username)
     if (user == null) {
       return done(null, false, { message: 'Incorrect Username / Password 1' })
     }
