@@ -23,8 +23,8 @@ const find_user_by_id = (id2) => {
 initPassport(
     
     passport,
-    username => { return find_user_by_username(username) },
-    id => { return find_user_by_id(id) }
+    (username) => find_user_by_username(username),
+    (id) => find_user_by_id(id) 
 )
 app.set('trust proxy', 1);
 
@@ -36,9 +36,9 @@ app.use(express.static(__dirname + '/public'))
 app.use(express.urlencoded({ extended: false }))
 app.use(flash())
 app.use(session({
-    cookie:{
-        secure: true,
-        maxAge: 86400000
+    cookie: {
+            secure: true,
+            maxAge: 86400000
            },
     store: new MemoryStore(),
     secret: process.env.SESSION_SECRET,
