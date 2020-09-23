@@ -14,7 +14,7 @@ const session = require('express-session')
 var MemoryStore = require('memorystore')(session)
 const bodyParser = require('body-parser')
 
-const find_user_by_username = (username2) => user = Bu.find( { username: username2 } )
+const find_user_by_username = (username2) => user = Bu.find( { username: username2 } ).password
 
 const find_user_by_id = id2 => user = Bu.findById(id2)
 
