@@ -11,9 +11,11 @@ function initialize(passport, getUserByUsername, getUserById) {
 
     console.log(password)
     console.log(user.password)
-
+    
     try {
       await bcrypt.compare(password, user.password, function(err, sucess) {
+        console.log(password)
+        console.log(user.password)
         if (err) throw err
         if (sucess) {
           return done(null, user)
