@@ -9,22 +9,15 @@ function initialize(passport, getUserByUsername, getUserById) {
       return done(null, false, { message: 'Incorrect Username / Password 1' })
     }
 
+    console.log(password)
+    console.log(user.password)
+
     try {
-      console.log(password)
-      console.log(user.password)
-      await bcrypt.compare(password, user.password, function(err, sucess) {
-        console.log(password)
-        console.log(user.password)
-          if(err) {
-            throw err
-          }
-          if (sucess) {
-            return done(null, user)
-          } else {
-            return done(null, false, { message: 'Incorrect Username / Password 2' })
-          }
-      }) 
-      
+      if (await bcrypt.compare(password, user.password)) {
+        return done(null, user)
+      } else {
+        return done(null, false, { message: 'Incorrect Username / Password 2' })
+      }
     } catch (e) {
       return done(e)
     }
