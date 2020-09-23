@@ -16,7 +16,7 @@ const bodyParser = require('body-parser')
 
 const find_user_by_username = (username2) => user = Bu.find( { username: username2 } )
 
-const find_user_password = (password2) =>  user_password = Bu.findBy( { password: password2 } ).password
+const find_user_password = (password2) =>  user_password = Bu.find( { password: password2 } ).password
 
 const find_user_by_id = id2 => user = Bu.findById(id2)
 
