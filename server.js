@@ -16,7 +16,25 @@ const bodyParser = require('body-parser')
 
 const find_user_by_username = (username2) => user = Bu.find( { username: username2 } )
 
-const find_user_password = (password2) =>  user_password = Bu.find( { password: password2 } ).password
+const find_user_password = (username3) =>  user_password = Bu.find( { username: username3 } ).select('password -_id -_v -username -dateJoined -id -email')
+
+
+/* db -- program then 
+ so user is coming form the databse sucessfully but i do not know how to acess the user's password yet!
+ so what should i do?
+ finding the user that is trying to login using his/her username ... DONE!
+ Getting the password form that user ... ERR!
+ EER!
+ EER!
+ EER!
+ EER!
+ 
+ REFRESH !
+
+ I think i found the answer!
+ Go to https://intellipaat.com/community/45032/mongoose-select-a-specific-field-with-find
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ */
+
 
 const find_user_by_id = id2 => user = Bu.findById(id2)
 
@@ -25,7 +43,7 @@ initPassport(
     passport,
     username => find_user_by_username(username),
     id => find_user_by_id(id),
-    password => find_user_password(password)
+    username => find_user_password(username)
 )
 app.set('trust proxy', 1);
 
