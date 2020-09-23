@@ -5,15 +5,23 @@ const passport = require('passport')
 function initialize(passport, getUserByUsername, getUserById, getUserPassword) {
   const authenticateUser = async (username, password, done) => {
     const user = getUserByUsername(username)
-    const userPwd = user
+    const userPwd = getUserPassword(username)
     if (user == null) {
       return done(null, false, { message: 'Incorrect Username / Password 1' })
     }
+    
+    if (password == null) {
+      return done(null, false, { message: 'Incorrect Username / Password 1' })
+      console.log("User Pwd Not Found")
+    }
+    
 
     console.log(password)
     console.log(userPwd)
     try {
       await bcrypt.compare(password, userPwd, function(err, sucess) {
+        console.log(password)
+        console.log(userPwd)
         if (err) throw err
         if (sucess) {
           return done(null, user)

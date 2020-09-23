@@ -14,17 +14,13 @@ const session = require('express-session')
 var MemoryStore = require('memorystore')(session)
 const bodyParser = require('body-parser')
 
-const find_user_by_username = (username2) => user = Bu.find( { username: username2 } )
-
-const find_user_password = (username3) =>  user_password = Bu.find( { username: username3 } ).select('password -_id -_v -username -dateJoined -id -email')
+const find_user_by_username = (username2) => user = Bu.findOne( { username: username2 } )
 
 
-/* db -- program then 
- so user is coming form the databse sucessfully but i do not know how to acess the user's password yet!
- so what should i do?
- finding the user that is trying to login using his/her username ... DONE!
- Getting the password form that user ... ERR!
- EER!
+const find_user_password = (username3) =>  user_password = Bu.find( { username: username3 }, 'password' )
+
+
+/*EER!
  EER!
  EER!
  EER!
@@ -33,7 +29,25 @@ const find_user_password = (username3) =>  user_password = Bu.find( { username: 
 
  I think i found the answer!
  Go to https://intellipaat.com/community/45032/mongoose-select-a-specific-field-with-find
-_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ */
+
+ Lets See!
+
+ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+ EER !
+ EER !
+ EER !
+ EER !
+ EER !
+
+TESTING !!!!!!!!!!!
+
+
+WAITING !!!!!!!!!!!!
+
+ Trying what mentiond at https://developer.mozilla.org/en-US/docs/Learn/Server-side/Express_Nodejs/mongoose
+ */
+ 
+
 
 
 const find_user_by_id = id2 => user = Bu.findById(id2)
@@ -43,7 +57,7 @@ initPassport(
     passport,
     username => find_user_by_username(username),
     id => find_user_by_id(id),
-    username => find_user_password(username)
+    userdetails => find_user_password(userdetails)
 )
 app.set('trust proxy', 1);
 
