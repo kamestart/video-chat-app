@@ -14,7 +14,9 @@ const session = require('express-session')
 var MemoryStore = require('memorystore')(session)
 const bodyParser = require('body-parser')
 
-const find_user_by_username = (username2) => user = Bu.find( { username: username2 } ).password
+const find_user_by_username = (username2) => user = Bu.find( { username: username2 } )
+
+const find_user_password = (password2) =>  user_password = Bu.findBy( { password: password2 } ).password
 
 const find_user_by_id = id2 => user = Bu.findById(id2)
 
@@ -22,7 +24,8 @@ initPassport(
     
     passport,
     username => find_user_by_username(username),
-    id => find_user_by_id 
+    id => find_user_by_id(id),
+    password => find_user_password(password)
 )
 app.set('trust proxy', 1);
 
