@@ -10,7 +10,7 @@ function initialize(passport, getUserByUsername, getUserById, getUserPassword) {
       return done(null, false, { message: 'Incorrect Username / Password 1' })
     }
     
-    if (password == null) {
+    if (userPwd == null) {
       return done(null, false, { message: 'Incorrect Username / Password 1' })
       console.log("User Pwd Not Found")
     }
@@ -19,7 +19,7 @@ function initialize(passport, getUserByUsername, getUserById, getUserPassword) {
     console.log(password)
     console.log(userPwd)
     try {
-      await bcrypt.compare(password, userPwd, function(err, sucess) {
+      await bcrypt.compare(password, 'w', function(err, sucess) {
         console.log(password)
         console.log(userPwd)
         if (err) throw err

@@ -1,6 +1,7 @@
 const mongoose = require('mongoose')    
+var Schema = mongoose.Schema
 
-var userSchema = new mongoose.Schema({
+var userSchema = new Schema({
     username: {
         type: String,
         required: true
@@ -9,19 +10,10 @@ var userSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    email: {
-        type: String,
-        required: false
-    },
     id: {
         type: Date,
         required: true,
         default: Date.now().toString()
-    },
-    dateJoined: {
-        type: Date,
-        required: true,
-        default: Date.now()
     }
 })
 
