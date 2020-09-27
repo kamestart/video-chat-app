@@ -6,6 +6,7 @@ function initialize(passport, getUserByUsername, getUserById, getUserPassword) {
   const authenticateUser = async (username, password, done) => {
     const user = getUserByUsername(username)
     const userPwd = getUserPassword(username)
+    console.log(user)
     if (user == null) {
       return done(null, false, { message: 'Incorrect Username / Password 1' })
     }
