@@ -32,10 +32,30 @@ const session = require('express-session')
 var MemoryStore = require('memorystore')(session)
 const bodyParser = require('body-parser')
 
-const find_user_by_username = (username2) => userReturned = user.find( { username: username2 } )
+const find_user_by_username = (username2) => {
+    user.find( { username: username2 }, function(err, user){
+        var userReturned
+        if (err == null) {
+            userReturned = user
+            return userReturned
+        } else {
+            userReturned = null
+        }
+    })
+}
 
 
-const find_user_password = (username3) => user_password =  user.find({ username: username3 }, 'password').limit(1)   
+const find_user_password = (username3) => {
+    user.find({ username: username3 }, function(err, password){
+        var userPassword
+        if(err == null) {
+            userPassword = password
+        } else {
+            userPassword = null
+        }
+
+    }).select('password')
+}
  
 
 const find_user_by_id = id2 => userReturnedById = user.findById(id2)
