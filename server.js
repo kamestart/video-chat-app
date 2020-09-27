@@ -5,24 +5,25 @@ const PORT = process.env.PORT || 3000
 const express = require('express')
 const app = express()
 const mongoose = require('mongoose')    
-var Schema = mongoose.Schema
 
-var userSchema = new Schema({
-    username: {
-        type: String,
-        required: true
-    },
-    password: {
-        type: String,
-        required: true
-    },
-    id: {
-        type: String,
-        required: true,
+var userSchema = new mongoose.Schema(
+    {
+        username: {
+            type: String,
+            required: true
+        },
+        password: {
+            type: String,
+            required: true
+        },
+        id: {
+            type: String,
+            required: true,
+        }
     }
-})
+)
 
-const user = mongoose.model('user', userSchema)
+var user = mongoose.model('user', userSchema)
 const bcrypt = require('bcrypt')
 const initPassport = require('./passport-config')
 const passport = require('passport')
