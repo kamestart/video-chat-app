@@ -31,10 +31,10 @@ const session = require('express-session')
 var MemoryStore = require('memorystore')(session)
 const bodyParser = require('body-parser')
 
-const find_user_by_username = (username2) => user = process.env.DATABASE_URL.find( { username: username2 } )
+const find_user_by_username = (username2) => user = user.find( { username: username2 } )
 
 
-const find_user_password = (username3) => user_password =  process.env.DATABASE_URL.find({ username: username3 }, 'password').limit(1)   
+const find_user_password = (username3) => user_password =  user.find({ username: username3 }, 'password').limit(1)   
  
 
 const find_user_by_id = id2 => user = user.findById(id2)
