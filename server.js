@@ -92,11 +92,14 @@ app.post('/', async (req, res) => {
     try {
         await bcrypt.hash(req.body.password, 16)
         .then((hashedPwd) => {
+            var i = 1
             const newUser = new user({
                 username: req.body.username,
                 email: req.body.email,
-                password: hashedPwd
-            });
+                password: hashedPwd,
+                id: i
+            })
+            i++
             newUser.save()
             .then((response) => {
                 res.redirect('/login')
