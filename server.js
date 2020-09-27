@@ -5,7 +5,8 @@ const PORT = process.env.PORT || 3000
 const express = require('express')
 const app = express()
 const mongoose = require('mongoose')
-const User = require('./models/users')
+const userSchema = require('./models/userSchemas')
+const user = mongoose.model('user', userSchema)
 const bcrypt = require('bcrypt')
 const initPassport = require('./passport-config')
 const passport = require('passport')
@@ -14,13 +15,13 @@ const session = require('express-session')
 var MemoryStore = require('memorystore')(session)
 const bodyParser = require('body-parser')
 
-const find_user_by_username = (username2) => user = process.env.DATABASE_URL.find( { username: username2 } )
+const find_user_by_uername = (username2) => user = process.env.DATABASE_URL.find( { username: username2 } )
 
 
-const find_user_password = (username3) => user_password =  process.env.DATABASE_URL.find({ username: username3 }, `password`).limit(1)   
+const find_user_password = (username3) => user_password =  process.env.DATABASE_URL.find({ username: username3 }, 'password').limit(1)   
  
 
-const find_user_by_id = id2 => user = User.findById(id2)
+const find_user_by_id = id2 => user = user.findById(id2)
 
 initPassport(
     passport,
