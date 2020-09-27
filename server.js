@@ -33,24 +33,25 @@ var MemoryStore = require('memorystore')(session)
 const bodyParser = require('body-parser')
 
 const find_user_by_username = (username2) => {
-    user.find( { username: username2 }, function(err, user){
+    var userGuy = user.find( { username: username2 }, function(err, user){
         var userReturned
         if (user) {
             userReturned = user
-            return userReturned
+            userReturned
         } else if (err)  {
             console.log(err)
             throw err
         } else {
             console.log("No User with that username/password")
-            return userReturned = null
         }
+
+    return userGuy    
     })
 }
 
 
 const find_user_password = (username3) => {
-    user.find({ username: username3 }, function(err, password){
+    var userPASSWORD = user.find({ username: username3 }, function(err, password){
         var userPassword
         if(err == null) {
             userPassword = password
@@ -59,8 +60,10 @@ const find_user_password = (username3) => {
             throw err
         } else {
             console.log("No User with that username/password")
-            return userReturned = null
+            userReturned = null
         }
+
+        return userPASSWORD
 
     }).select('password')
 }
