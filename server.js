@@ -4,16 +4,28 @@ if (process.env.NODE_ENV != 'production') {
 const PORT = process.env.PORT || 3000
 const express = require('express')
 const app = express()
-const mongoose = require('mongoose')
-const userSchema = require('./models/users')
+const mongoose = require('mongoose')    
+var Schema = mongoose.Schema
+var userSchema = new Schema({
+    username: {
+        type: String,
+        required: true
+    },
+    password: {
+        type: String,
+        required: true
+    },
+    id: {
+        type: String,
+        required: true,
+    }
+})
 const user = mongoose.model('user', userSchema)
 const bcrypt = require('bcrypt')
 const initPassport = require('./passport-config')
 const passport = require('passport')
 const flash = require('express-flash')
 const session = require('express-session')
-var MemoryStore = require('memorystore')(session)
-const bodyParser = require('body-parser')
 
 const find_user_by_uername = (username2) => user = process.env.DATABASE_URL.find( { username: username2 } )
 
