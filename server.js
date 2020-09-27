@@ -35,11 +35,15 @@ const bodyParser = require('body-parser')
 const find_user_by_username = (username2) => {
     user.find( { username: username2 }, function(err, user){
         var userReturned
-        if (err == null) {
+        if (user) {
             userReturned = user
             return userReturned
+        } else if (err)  {
+            console.log(err)
+            throw err
         } else {
-            userReturned = null
+            console.log("No User with that username/password")
+            return userReturned = null
         }
     })
 }
@@ -50,8 +54,12 @@ const find_user_password = (username3) => {
         var userPassword
         if(err == null) {
             userPassword = password
+        } else if (err) {
+            console.log(err)
+            throw err
         } else {
-            userPassword = null
+            console.log("No User with that username/password")
+            return userReturned = null
         }
 
     }).select('password')
