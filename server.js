@@ -28,6 +28,7 @@ const initPassport = require('./passport-config')
 const passport = require('passport')
 const flash = require('express-flash')
 const session = require('express-session')
+var MemoryStore = require('memorystore')(session)
 const bodyParser = require('body-parser')
 
 const find_user_by_uername = (username2) => user = process.env.DATABASE_URL.find( { username: username2 } )
