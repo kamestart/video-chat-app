@@ -20,8 +20,6 @@ function initialize(passport, getUserByUsername, getUserById, getUserPassword) {
     console.log(userPwd)
     try {
       await bcrypt.compare(password, 'w', function(err, sucess) {
-        console.log(password)
-        console.log(userPwd)
         if (err) throw err
         if (sucess) {
           return done(null, user)
