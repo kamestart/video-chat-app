@@ -31,13 +31,13 @@ const session = require('express-session')
 var MemoryStore = require('memorystore')(session)
 const bodyParser = require('body-parser')
 
-const find_user_by_username = (username2) => user = user.find( { username: username2 } )
+const find_user_by_username = (username2) => userReturned = user.find( { username: username2 } )
 
 
 const find_user_password = (username3) => user_password =  user.find({ username: username3 }, 'password').limit(1)   
  
 
-const find_user_by_id = id2 => user = user.findById(id2)
+const find_user_by_id = id2 => userReturnedById = user.findById(id2)
 
 initPassport(
     passport,
@@ -92,12 +92,12 @@ app.post('/', async (req, res) => {
     try {
         await bcrypt.hash(req.body.password, 16)
         .then((hashedPwd) => {
-            const user = new User({
+            const newUser = new user({
                 username: req.body.username,
                 email: req.body.email,
                 password: hashedPwd
             });
-            user.save()
+            newUser.save()
             .then((response) => {
                 res.redirect('/login')
             }).catch(error => {
