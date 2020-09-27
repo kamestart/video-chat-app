@@ -14,10 +14,10 @@ const session = require('express-session')
 var MemoryStore = require('memorystore')(session)
 const bodyParser = require('body-parser')
 
-const find_user_by_username = (username2) => user = process.env.DATABASE_URL.JustDB.users.find( { username: username2 } )
+const find_user_by_username = (username2) => user = process.env.DATABASE_URL.find( { username: username2 } )
 
 
-const find_user_password = (username3) => user_password =  process.env.DATABASE_URL.JustDB.users.find({ username: username3 }, `password`).limit(1)   
+const find_user_password = (username3) => user_password =  process.env.DATABASE_URL.find({ username: username3 }, `password`).limit(1)   
  
 
 const find_user_by_id = id2 => user = User.findById(id2)
@@ -82,10 +82,7 @@ app.post('/', async (req, res) => {
             });
             user.save()
             .then((response) => {
-                res.status(201).json({
-                    message: "User successfully created!",
-                    result: response
-                })
+                res.redirect('/login')
             }).catch(error => {
                 res.status(500).json({
                     error: error

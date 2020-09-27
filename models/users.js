@@ -11,9 +11,8 @@ var userSchema = new Schema({
         required: true
     },
     id: {
-        type: Date,
+        type: String,
         required: true,
-        default: Date.now().toString()
     }
 })
 
