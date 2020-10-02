@@ -6,24 +6,7 @@ const express = require('express')
 const app = express()
 const mongoose = require('mongoose')    
 
-var userSchema = new mongoose.Schema(
-    {
-        username: {
-            type: String,
-            required: true
-        },
-        password: {
-            type: String,
-            required: true
-        },
-        id: {
-            type: String,
-            required: true,
-        }
-    }
-)
-
-var user_in_db = mongoose.model('user', userSchema)
+var user_in_db = mongoose.model('user')
 const bcrypt = require('bcrypt')
 const initPassport = require('./passport-config')
 const passport = require('passport')
