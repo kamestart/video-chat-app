@@ -31,51 +31,13 @@ const flash = require('express-flash')
 const session = require('express-session')
 var MemoryStore = require('memorystore')(session)
 const bodyParser = require('body-parser')
-
-const find_user_by_username = (username2) => {
-    var userGuy = user.find( { username: username2 }, function(err, user){
-        var userReturned
-        if (user) {
-            userReturned = user
-            userReturned
-        } else if (err)  {
-            console.log(err)
-            throw err
-        } else {
-            console.log("No User with that username/password")
-        }
-
-    return userGuy    
-    })
-}
-
-
-const find_user_password = (username3) => {
-    var userPASSWORD = user.find({ username: username3 }, function(err, password){
-        var userPassword
-        if(err == null) {
-            userPassword = password
-        } else if (err) {
-            console.log(err)
-            throw err
-        } else {
-            console.log("No User with that username/password")
-            userReturned = null
-        }
-
-        return userPASSWORD
-
-    }).select('password')
-}
- 
-
-const find_user_by_id = id2 => userReturnedById = user.findById(id2)
+var i = 1
 
 initPassport(
     passport,
-    username => find_user_by_username(username),
-    id => find_user_by_id(id),
-    username3 => find_user_password(username3)
+    username => user_to_login = mongoose.connection.find( { username: username }).limit(1),
+    id => userReturnedById = mongoose.connection.findById(id),
+    username => user_password = mongoose.connection.find({ username: username }, 'password')
 )
 app.set('trust proxy', 1);
 
@@ -119,28 +81,20 @@ app.post('/login', (req, res, next) => {
         failureRedirect: '/login',
         failureFlash: true
     })(req, res, next);
-});
+})
+
 app.post('/', async (req, res) => {
     try {
-        await bcrypt.hash(req.body.password, 16)
-        .then((hashedPwd) => {
-            var i = 1
+        const hashedPwd = await bcrypt.hash(req.body.password, 16)
             const newUser = new user({
                 username: req.body.username,
                 email: req.body.email,
                 password: hashedPwd,
                 id: i
             })
-            i++
+            i = i + 1
             newUser.save()
-            .then((response) => {
-                res.redirect('/login')
-            }).catch(error => {
-                res.status(500).json({
-                    error: error
-                })
-            })
-        })
+            res.redirect('/login') 
     } catch(e) {
         console.log(e)
     }

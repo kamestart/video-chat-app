@@ -2,18 +2,17 @@ const LocalStrategy = require('passport-local').Strategy
 const bcrypt = require('bcrypt')
 const passport = require('passport')
 
+
 function initialize(passport, getUserByUsername, getUserById, getUserPassword) {
   const authenticateUser = async (username, password, done) => {
     const user = getUserByUsername(username)
     const userPwd = getUserPassword(username)
-    console.log(user)
+    console.log(userPwd)
     if (user == null) {
       return done(null, false, { message: 'Incorrect Username / Password 1' })
     }
-    
     if (userPwd == null) {
       return done(null, false, { message: 'Incorrect Username / Password 1' })
-      console.log("User Pwd Not Found")
     }
     
 
