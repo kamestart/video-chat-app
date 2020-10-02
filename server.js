@@ -23,7 +23,7 @@ var userSchema = new mongoose.Schema(
     }
 )
 
-var user = mongoose.model('user', userSchema)
+var user_in_db = mongoose.model('user', userSchema)
 const bcrypt = require('bcrypt')
 const initPassport = require('./passport-config')
 const passport = require('passport')
@@ -35,9 +35,9 @@ var i = 1
 
 initPassport(
     passport,
-    username => user_to_login = mongoose.connection.find( { username: username }).limit(1),
-    id => userReturnedById = mongoose.connection.findById(id),
-    username => user_password = mongoose.connection.find({ username: username }, 'password')
+    username => user_to_login = user_in_db.findOne( { username: username }),
+    id => userReturnedById = user_in_db.findById(id),
+    username => user_password = user_in_db.findOne({ username: username }, 'password')
 )
 app.set('trust proxy', 1);
 
@@ -86,7 +86,7 @@ app.post('/login', (req, res, next) => {
 app.post('/', async (req, res) => {
     try {
         const hashedPwd = await bcrypt.hash(req.body.password, 16)
-            const newUser = new user({
+            const newUser = new user_in_db({
                 username: req.body.username,
                 email: req.body.email,
                 password: hashedPwd,
