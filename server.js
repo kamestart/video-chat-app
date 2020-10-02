@@ -6,7 +6,7 @@ const express = require('express')
 const app = express()
 const mongoose = require('mongoose')    
 
-var user_in_db = mongoose.model('user')
+var user_in_db = require('./models/users')
 const bcrypt = require('bcrypt')
 const initPassport = require('./passport-config')
 const passport = require('passport')
