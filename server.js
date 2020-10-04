@@ -41,6 +41,7 @@ initPassport(
     username => {
         var user_password
         return  user_password = user_in_db.findOne({ username: username }, 'password')
+        .populate('-_id')
         .exec()
         .then(final_user => {
             return finalUser = final_user
@@ -82,7 +83,6 @@ app.get('/login', (req, res) => {
     res.render('login.ejs')
 })
 
-
 app.post('/login', (req, res, next) => {
     console.log(req.url)
     passport.authenticate('local', {
@@ -105,7 +105,6 @@ app.post('/', async (req, res) => {
             i = i + 1
             newUser.save().then(result => {
                 console.log('erfcfcdwwq3e')
-                console.log(result)
             })
             res.redirect('/login') 
     } catch(e) {
