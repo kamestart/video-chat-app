@@ -37,17 +37,8 @@ initPassport(
             return finalUser = final_user
         })
         .catch(err => console.log(err))
-    },
-    username => {
-        var user_password
-        return  user_password = user_in_db.findOne({ username: username }, 'password')
-        .populate('-_id')
-        .exec()
-        .then(final_user => {
-            return finalUser = final_user
-        })
-        .catch(err => console.log(err))
     }
+
 )
 app.set('trust proxy', 1);
 
@@ -68,6 +59,8 @@ app.use(session({
     resave: false,
     saveUninitialized: false
 }))
+
+app.use(session({ secret: process.env.SESSION_SECRET }));
 app.use(passport.initialize())
 app.use(passport.session())
 
@@ -94,7 +87,6 @@ app.post('/login', (req, res, next) => {
 
 app.post('/', async (req, res) => {
     try {
-        console.log(req.body.password)
         var salt = await bcrypt.genSalt(16)
         const hashedPwd = await bcrypt.hash(req.body.password, salt)
             const newUser = new user_in_db({
@@ -114,6 +106,6 @@ app.post('/', async (req, res) => {
 })
 
 app.get('/home', (req, res) => {
-    res.render('index.ejs')
+    res.render('index.ejs', { name: req.user.name  })
 })
 
