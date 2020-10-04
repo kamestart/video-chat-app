@@ -6,7 +6,7 @@ const express = require('express')
 const app = express()
 const mongoose = require('mongoose')    
 
-var user_in_db = require('./models/users')
+var user_in_db = require('./models/user')
 const bcrypt = require('bcrypt')
 const initPassport = require('./passport-config')
 const passport = require('passport')
@@ -18,9 +18,35 @@ var i = 1
 
 initPassport(
     passport,
-    username => user_to_login = user_in_db.findOne( { username: username }),
-    id => userReturnedById = user_in_db.findById(id),
-    username => user_password = user_in_db.findOne({ username: username }, 'password')
+    username => {
+        var useri
+        return useri = user_in_db.findOne( { username: username })
+        .exec()
+        .then(final_user => {
+            return finalUser = final_user
+            console.log(final_user)
+        })
+        .catch(err => console.log(err))
+        
+    },  
+    id => {
+        var userReturnedById
+        return userReturnedById = user_in_db.findById(id)
+        .exec()
+        .then(final_user => {
+            return finalUser = final_user
+        })
+        .catch(err => console.log(err))
+    },
+    username => {
+        var user_password
+        return  user_password = user_in_db.findOne({ username: username }, 'password')
+        .exec()
+        .then(final_user => {
+            return finalUser = final_user
+        })
+        .catch(err => console.log(err))
+    }
 )
 app.set('trust proxy', 1);
 
@@ -29,7 +55,7 @@ app.listen(PORT, () => {
 })
 
 app.use(express.static(__dirname + '/public'))
-app.use(bodyParser.urlencoded({ extended: false }))
+app.use(express.urlencoded({ extended: true }))
 app.use(flash())
 app.use(session({
     cookie: {
@@ -68,6 +94,7 @@ app.post('/login', (req, res, next) => {
 
 app.post('/', async (req, res) => {
     try {
+        console.log(req.body.password)
         const hashedPwd = await bcrypt.hash(req.body.password, 16)
             const newUser = new user_in_db({
                 username: req.body.username,
@@ -76,7 +103,10 @@ app.post('/', async (req, res) => {
                 id: i
             })
             i = i + 1
-            newUser.save()
+            newUser.save().then(result => {
+                console.log('erfcfcdwwq3e')
+                console.log(result)
+            })
             res.redirect('/login') 
     } catch(e) {
         console.log(e)

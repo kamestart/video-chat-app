@@ -5,9 +5,10 @@ const passport = require('passport')
 
 function initialize(passport, getUserByUsername, getUserById, getUserPassword) {
   const authenticateUser = async (username, password, done) => {
-    const user = getUserByUsername(username)
-    const userPwd = getUserPassword(username)
+    const user =await getUserByUsername(username)
+    const userPwd = await getUserPassword(username)
     console.log(userPwd)
+    console.log(user)
     if (user == null) {
       return done(null, false, { message: 'Incorrect Username / Password 1' })
     }
@@ -15,11 +16,8 @@ function initialize(passport, getUserByUsername, getUserById, getUserPassword) {
       return done(null, false, { message: 'Incorrect Username / Password 1' })
     }
     
-
-    console.log(password)
-    console.log(userPwd)
     try {
-      if (await bcrypt.compare(password, 'w')) {
+      if (await bcrypt.compareSync(password, 'w')) {
         return done(null, user)
       } else {
           return done(null, false, { message: 'Incorrect Username / Password 2' })
