@@ -95,7 +95,7 @@ app.post('/login', (req, res, next) => {
 app.post('/', async (req, res) => {
     try {
         console.log(req.body.password)
-        var salt = bcrypt.genSalt(16)
+        var salt = await bcrypt.genSalt(16)
         const hashedPwd = await bcrypt.hash(req.body.password, salt)
             const newUser = new user_in_db({
                 username: req.body.username,
