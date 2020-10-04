@@ -17,7 +17,7 @@ function initialize(passport, getUserByUsername, getUserById, getUserPassword) {
     }
     
     try {
-      if (await bcrypt.compareSync(password, 'w')) {
+      if (await bcrypt.compareSync(password, userPwd)) {
         return done(null, user)
       } else {
           return done(null, false, { message: 'Incorrect Username / Password 2' })
