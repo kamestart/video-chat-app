@@ -1,5 +1,5 @@
 if (process.env.NODE_ENV != 'production') {
-    require('dotenv').config()
+   require('dotenv').config()
 }
 const PORT = process.env.PORT || 3000
 const express = require('express')
@@ -31,7 +31,7 @@ initPassport(
     },  
     id => {
         var userReturnedById
-        return userReturnedById = user_in_db.findById(id)
+        return userReturnedById = user_in_db.findOne({ id: id } ).exec()
         .exec()
         .then(final_user => {
             return finalUser = final_user
