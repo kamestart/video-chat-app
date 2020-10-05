@@ -60,10 +60,6 @@ app.use(session({
     saveUninitialized: false
 }))
 
-app.use(session({ secret: process.env.SESSION_SECRET }));
-app.use(passport.initialize())
-app.use(passport.session())
-
 mongoose.connect(process.env.DATABASE_URL, { useUnifiedTopology: true, useNewUrlParser: true })
 
 app.set('view-engine', 'ejs')
