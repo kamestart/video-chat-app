@@ -31,7 +31,7 @@ initPassport(
     },  
     id => {
         var userReturnedById
-        return userReturnedById = user_in_db.findOne({ id: id } ).exec()
+        return userReturnedById = user_in_db.findOne({ id: id } )
         .exec()
         .then(final_user => {
             return finalUser = final_user
