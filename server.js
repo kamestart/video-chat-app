@@ -106,6 +106,6 @@ app.post('/', async (req, res) => {
 })
 
 app.get('/home', (req, res) => {
-    res.render('index.ejs', { name: req.user.name  })
+    res.render('index.ejs', { name: req.user.username  })
 })
 
